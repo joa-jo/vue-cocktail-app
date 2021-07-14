@@ -1,17 +1,16 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Pick your cocktails!" />
-  </div>
+  <main class="home">
+    <Login msg="Sign in" />
+  </main>
 </template>
 
 <script>
-import HelloWorld from "@/components/HelloWorld.vue";
+import Login from '@/components/Login.vue';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
-    HelloWorld,
+    Login,
   },
 };
 </script>

@@ -1,14 +1,27 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <nav id="nav">
       <router-link to="/">Cocktail Picks</router-link> |
       <router-link to="/your-picks">Your Picks</router-link>
-    </div>
+    </nav>
     <router-view />
+    <Footer />
   </div>
 </template>
 
+<script>
+import Footer from './components/Footer.vue';
+
+export default {
+  name: 'App',
+  components: {
+    Footer,
+  },
+};
+</script>
+
 <style lang="scss">
+// Reset CSS
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
