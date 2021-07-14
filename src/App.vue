@@ -1,8 +1,14 @@
 <template>
   <div id="app">
-    <nav id="nav">
-      <router-link to="/">Cocktail Picks</router-link> |
-      <router-link to="/your-picks">Your Picks</router-link>
+    <nav class="nav">
+      <ul class="menus">
+        <li>
+          <router-link to="/">Cocktail Picks</router-link>
+        </li>
+        <li>
+          <router-link to="/your-picks">Your Picks</router-link>
+        </li>
+      </ul>
     </nav>
     <router-view />
     <Footer />
@@ -21,24 +27,111 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@700&family=Ubuntu:wght@400;500&display=swap');
+@import '@/scss/variables';
+@import '@/scss/mixins';
+
 // Reset CSS
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#nav {
-  padding: 30px;
+#app {
+  font-family: 'Ubuntu', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #313649;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+ul,
+li {
+  list-style: none;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+// Navigation
+.nav {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 60px;
+  padding: 0 1rem;
+  background-color: #fff;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 700;
+  z-index: 20;
+  .menus {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    li {
+      position: relative;
+      &:last-of-type {
+        .router-link-exact-active {
+          &:after {
+            width: 90%;
+          }
+        }
+      }
+    }
+    a {
+      display: block;
+      padding: 0.8rem;
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 0;
+        height: 1.2px;
+        background-color: $cocktailDark;
+        transition: width 0.25s;
+      }
+      &:hover:after {
+        width: 90%;
+      }
+    }
+  }
+}
+
+@include tablet {
+  .nav {
+    padding: 0 3rem;
+    .menus {
+      justify-content: flex-end;
+    }
+  }
+}
+
+@include desktop {
+  .nav {
+    padding: 0 4rem;
+    .menus {
+      justify-content: flex-end;
     }
   }
 }
