@@ -1,7 +1,7 @@
 <template>
-  <div class="your-picks">
+  <main class="your-picks">
     <h1>Your Picks page</h1>
-  </div>
+  </main>
 </template>
 
 <script>
