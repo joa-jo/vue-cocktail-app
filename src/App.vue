@@ -29,45 +29,8 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@700&family=Ubuntu:wght@400;500&display=swap');
 @import '@/scss/variables';
+@import '@/scss/reset';
 @import '@/scss/mixins';
-
-// Reset CSS
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-#app {
-  font-family: 'Ubuntu', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #313649;
-}
-
-ul,
-li {
-  list-style: none;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font-family: inherit;
-  font-size: inherit;
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-  cursor: pointer;
-}
-
-input {
-  font-family: inherit;
-  font-size: inherit;
-}
 
 // Navigation
 .nav {
