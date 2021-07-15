@@ -16,21 +16,21 @@
 </template>
 
 <script>
-import Footer from './components/Footer.vue';
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
-    Footer,
-  },
-};
+    Footer
+  }
+}
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@700&family=Ubuntu:wght@400;500&display=swap');
-@import '@/scss/variables';
-@import '@/scss/reset';
-@import '@/scss/mixins';
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@700&family=Ubuntu:wght@400;500&display=swap");
+@import "@/scss/variables";
+@import "@/scss/reset";
+@import "@/scss/mixins";
 
 // Navigation
 .nav {
@@ -42,7 +42,7 @@ export default {
   height: 60px;
   padding: 0 1rem;
   background-color: #fff;
-  font-family: 'Heebo', sans-serif;
+  font-family: "Heebo", sans-serif;
   font-weight: 700;
   z-index: 20;
   .menus {
@@ -62,8 +62,8 @@ export default {
     a {
       display: block;
       padding: 0.8rem;
-      &:after {
-        content: '';
+      &::after {
+        content: "";
         display: block;
         position: absolute;
         top: 50%;
@@ -74,7 +74,7 @@ export default {
         background-color: $cocktailDark;
         transition: width 0.25s;
       }
-      &:hover:after {
+      &:hover::after {
         width: 90%;
       }
     }

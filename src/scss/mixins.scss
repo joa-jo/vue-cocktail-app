@@ -11,3 +11,20 @@
     @content;
   }
 }
+
+// Quotes
+@mixin login-quote {
+  content: 'One martini is alright, two is too many, three is not enough';
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 3rem;
+  transform: translateY(-52%);
+  max-width: 50%;
+  font-family: 'Heebo', sans-serif;
+  text-align: left;
+  font-size: 7rem;
+  font-weight: 700;
+  line-height: 6rem;
+  z-index: 30;
+}

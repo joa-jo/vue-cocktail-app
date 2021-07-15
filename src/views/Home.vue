@@ -5,18 +5,18 @@
 </template>
 
 <script>
-import Login from '@/components/Login.vue';
+import Login from '@/components/Login.vue'
 
 export default {
   name: 'Home',
   components: {
-    Login,
-  },
-};
+    Login
+  }
+}
 </script>
 
 <style lang="scss">
-@import '@/scss/mixins';
+@import "@/scss/mixins";
 main {
   width: 100%;
   height: calc(100vh - 120px);
