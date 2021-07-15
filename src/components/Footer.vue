@@ -4,8 +4,16 @@
 
 <script>
 export default {
-  name: "Footer",
+  name: 'Footer',
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  font-size: 0.8rem;
+}
+</style>
