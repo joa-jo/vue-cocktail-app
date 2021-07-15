@@ -17,13 +17,15 @@ export default {
 
 <style lang="scss">
 @import '@/scss/mixins';
+main {
+  width: 100%;
+  height: calc(100vh - 120px);
+}
 
 .home {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: calc(100vh - 120px);
 }
 
 @include tablet {
