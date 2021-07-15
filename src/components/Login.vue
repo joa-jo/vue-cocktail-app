@@ -3,8 +3,8 @@
     <h1 class="loginTitle">{{ msg }}</h1>
     <!-- Login Btns -->
     <ul class="loginBtns">
-      <li v-for="(btn, index) in btns" v-bind:key="index">
-        <button v-bind:title="`Login with ${btn.title}`">
+      <li v-for="(btn, index) in btns" :key="index">
+        <button :title="`Login with ${btn.title}`" @click.prevent="onLogin">
           {{ btn.title }}
         </button>
       </li>
@@ -13,23 +13,34 @@
 </template>
 
 <script>
+import authService from '@/service/auth_service'
+
 export default {
   name: 'Login',
   props: {
-    msg: String,
+    msg: {
+      type: String,
+      default: ''
+    }
   },
   data() {
     return {
-      btns: [{ title: 'Google' }, { title: 'Facebook' }, { title: 'Github' }],
-    };
+      btns: [{ title: 'Google' }, { title: 'Facebook' }, { title: 'Github' }]
+    }
   },
-};
+  methods: {
+    onLogin(e) {
+      authService
+        .login(e.currentTarget.textContent.trim())
+        .then((data) => console.log(data))
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
-@import '@/scss/variables';
-@import '@/scss/mixins';
-@import '@/scss/quote';
+@import "@/scss/variables";
+@import "@/scss/mixins";
 
 // Login Buttons
 .login {
