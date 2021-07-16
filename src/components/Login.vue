@@ -1,6 +1,6 @@
 <template>
   <section class="login">
-    <h1 class="loginTitle">{{ msg }}</h1>
+    <h1>{{ msg }}</h1>
     <!-- Login Btns -->
     <ul class="loginBtns">
       <li v-for="(btn, index) in btns" :key="index">
@@ -29,10 +29,13 @@ export default {
     }
   },
   methods: {
+    goToApp(userId) {
+      console.log(userId)
+    },
     onLogin(title) {
       authService
         .login(title)
-        .then((data) => console.log(data))
+        .then((data) => this.goToApp(data.user.uid))
     }
   }
 }
