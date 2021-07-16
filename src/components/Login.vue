@@ -4,7 +4,7 @@
     <!-- Login Btns -->
     <ul class="loginBtns">
       <li v-for="(btn, index) in btns" :key="index">
-        <button :title="`Login with ${btn.title}`" @click.prevent="onLogin">
+        <button :title="`Login with ${btn.title}`" @click.prevent="onLogin(btn.title)">
           {{ btn.title }}
         </button>
       </li>
@@ -29,9 +29,9 @@ export default {
     }
   },
   methods: {
-    onLogin(e) {
+    onLogin(title) {
       authService
-        .login(e.currentTarget.textContent.trim())
+        .login(title)
         .then((data) => console.log(data))
     }
   }
@@ -45,7 +45,6 @@ export default {
 // Login Buttons
 .login {
   width: 100%;
-  // max-width: 100rem;
   padding: 0 1.8rem;
   text-align: center;
   h1 {
