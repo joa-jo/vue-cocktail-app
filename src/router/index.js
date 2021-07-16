@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
+import YourPicks from '@/views/YourPicks.vue'
 
 Vue.use(VueRouter)
 
@@ -13,7 +14,7 @@ const routes = [
   {
     path: '/your-picks',
     name: 'Your Picks',
-    component: () => import('@/views/YourPicks.vue')
+    component: YourPicks
   }
 ]
 
