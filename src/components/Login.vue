@@ -1,5 +1,6 @@
 <template>
   <section class="login">
+    <loginQuote />
     <h1>{{ msg }}</h1>
     <!-- Login Btns -->
     <ul class="loginBtns">
@@ -17,6 +18,9 @@ import authService from '@/service/auth_service'
 
 export default {
   name: 'Login',
+  components: {
+    loginQuote: () => import('@/components/LoginQuote.vue')
+  },
   props: {
     msg: {
       type: String,
@@ -82,9 +86,6 @@ export default {
   .login {
     max-width: 30%;
     margin-right: 3rem;
-    &::before {
-      @include login-quote;
-    }
   }
 }
 
@@ -94,11 +95,11 @@ export default {
     max-width: 30%;
     margin-right: 8rem;
     &::before {
-      @include login-quote;
       left: 4rem;
       font-size: 10rem;
       line-height: 8rem;
     }
   }
 }
+
 </style>
