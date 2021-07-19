@@ -5,7 +5,7 @@
     <!-- Search Part -->
     <h1>{{ msg }}</h1>
     <form action="GET" class="searchForm">
-      <input type="text">
+      <input type="text" placeholder="Search">
       <button>
         <img src="@/assets/search.png" alt="Search" class="searchBtnImg">
       </button>
