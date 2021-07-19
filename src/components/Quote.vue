@@ -25,7 +25,7 @@ export default {
 
   .quote {
     &::before {
-      content: '';
+      content: 'One martini is alright, two is too many, three is not enough';
       display: none;
       position: fixed;
       top: 50%;
