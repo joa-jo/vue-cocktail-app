@@ -1,16 +1,17 @@
 <template>
   <main class="home">
     <Login msg="Sign in" />
+    <!-- <Search msg="Search" /> -->
   </main>
 </template>
 
 <script>
-import Login from '@/components/Login.vue'
 
 export default {
   name: 'Home',
   components: {
-    Login
+    Login: () => import('@/components/Login.vue')
+    // Search: () => import('@/components/Search.vue')
   }
 }
 </script>

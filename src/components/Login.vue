@@ -1,8 +1,9 @@
 <template>
   <section class="login">
-    <loginQuote />
+    <!-- Decoration Quote -->
+    <Quote />
+    <!-- Login Part -->
     <h1>{{ msg }}</h1>
-    <!-- Login Btns -->
     <ul class="loginBtns">
       <li v-for="(btn, index) in btns" :key="index">
         <button :title="`Login with ${btn.title}`" @click.prevent="onLogin(btn.title)">
@@ -19,7 +20,7 @@ import authService from '@/service/auth_service'
 export default {
   name: 'Login',
   components: {
-    loginQuote: () => import('@/components/LoginQuote.vue')
+    Quote: () => import('@/components/Quote.vue')
   },
   props: {
     msg: {
@@ -33,13 +34,13 @@ export default {
     }
   },
   methods: {
-    goToApp(userId) {
+    goSearch(userId) {
       console.log(userId)
     },
     onLogin(title) {
       authService
         .login(title)
-        .then((data) => this.goToApp(data.user.uid))
+        .then((data) => this.goSearch(data.user.uid))
     }
   }
 }
@@ -94,11 +95,6 @@ export default {
     width: 100%;
     max-width: 30%;
     margin-right: 8rem;
-    &::before {
-      left: 4rem;
-      font-size: 10rem;
-      line-height: 8rem;
-    }
   }
 }
 
