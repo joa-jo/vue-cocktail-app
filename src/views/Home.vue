@@ -7,6 +7,7 @@
 
 <script>
 import authService from '@/service/auth_service'
+import cocktail from '@/service/cocktail_server'
 
 export default {
   name: 'Home',
@@ -21,10 +22,13 @@ export default {
     }
   },
   methods: {
+    onSearch(query) {
+      cocktail
+        .searchByName(query)
+        .then(cocktails => console.log(cocktails))
+    },
     goSearch(userId) {
-      console.log(`${userId} before`)
       this.userId = userId
-      console.log(`${userId} after`)
     },
     onLogin(title) {
       authService
