@@ -4,8 +4,12 @@
     <Quote />
     <!-- Search Part -->
     <h1>{{ msg }}</h1>
-    <form action="GET" class="searchForm">
-      <input type="text" placeholder="Search">
+    <form action="GET" class="searchForm" @submit.prevent="$emit('submit', input)">
+      <input
+        v-model="input"
+        type="text"
+        placeholder="Search"
+      >
       <button>
         <img src="@/assets/search.png" alt="Search" class="searchBtnImg">
       </button>

@@ -1,6 +1,6 @@
 <template>
   <main class="home">
-    <Search v-if="userId" msg="Search" />
+    <Search v-if="userId" msg="Search" @submit="onSubmit" />
     <Login v-else msg="Sign in" @login="onLogin" />
   </main>
 </template>
@@ -30,6 +30,9 @@ export default {
       authService
         .login(title)
         .then((data) => this.goSearch(data.user.uid))
+    },
+    onSubmit(input) {
+      console.log(input)
     }
   }
 }
