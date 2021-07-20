@@ -4,7 +4,7 @@
     <Quote />
     <!-- Search Part -->
     <h1>{{ msg }}</h1>
-    <form action="GET" class="searchForm">
+    <form class="searchForm">
       <input type="text" placeholder="Search">
       <button>
         <img src="@/assets/search.png" alt="Search" class="searchBtnImg">
