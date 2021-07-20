@@ -1,7 +1,7 @@
 <template>
   <section class="search">
     <!-- Decoration Quote -->
-    <Quote />
+    <Quote quote-in-search />
     <!-- Search Part -->
     <h1>{{ msg }}</h1>
     <form action="GET" class="searchForm" @submit.prevent="$emit('submit', input)">
@@ -27,6 +27,11 @@ export default {
     msg: {
       type: String,
       default: ''
+    }
+  },
+  data() {
+    return {
+      input: ''
     }
   }
 }

@@ -1,7 +1,10 @@
 <template>
   <main class="home">
-    <Search v-if="userId" msg="Search" @submit="onSubmit" />
+    <Search v-if="userId" msg="Search" @submit="onSearch" />
     <Login v-else msg="Sign in" @login="onLogin" />
+    <section v-if="cocktail">
+      <SearchList :cocktail="cocktail" />
+    </section>
   </main>
 </template>
 
@@ -13,30 +16,36 @@ export default {
   name: 'Home',
   components: {
     Login: () => import('@/components/Login.vue'),
-    Search: () => import('@/components/Search.vue')
+    Search: () => import('@/components/Search.vue'),
+    SearchList: () => import('@/components/SearchList.vue')
   },
-  props: {
-    userId: {
-      type: String,
-      default: ''
+  data() {
+    return {
+      userId: null,
+      cocktail: false
     }
   },
+  created() {
+    // TODO localstrage에서 uid SET로직
+  },
   methods: {
-    onSearch(query) {
-      cocktail
-        .searchByName(query)
-        .then(cocktails => console.log(cocktails))
-    },
     goSearch(userId) {
       this.userId = userId
     },
     onLogin(title) {
       authService
         .login(title)
-        .then((data) => this.goSearch(data.user.uid))
+        .then((data) => {
+          this.userId = data.user.uid
+        })
     },
-    onSubmit(input) {
-      console.log(input)
+    onSearch(query) {
+      cocktail
+        .searchByName(query)
+        .then(cocktails => {
+          console.log(cocktails)
+          this.cocktail = cocktails
+        })
     }
   }
 }
