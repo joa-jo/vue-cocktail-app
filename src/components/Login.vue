@@ -6,7 +6,7 @@
     <h1>{{ msg }}</h1>
     <ul class="loginBtns">
       <li v-for="(btn, index) in btns" :key="index">
-        <button :title="`Login with ${btn.title}`" @click.prevent="onLogin(btn.title)">
+        <button :title="`Login with ${btn.title}`" @click.prevent="$emit('login', btn.title)">
           {{ btn.title }}
         </button>
       </li>
@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import authService from '@/service/auth_service'
-
 export default {
   name: 'Login',
   components: {
@@ -32,17 +30,8 @@ export default {
     return {
       btns: [{ title: 'Google' }, { title: 'Facebook' }, { title: 'Github' }]
     }
-  },
-  methods: {
-    goSearch(userId) {
-      console.log(userId)
-    },
-    onLogin(title) {
-      authService
-        .login(title)
-        .then((data) => this.goSearch(data.user.uid))
-    }
   }
+
 }
 </script>
 

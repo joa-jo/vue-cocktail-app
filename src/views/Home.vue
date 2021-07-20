@@ -1,17 +1,36 @@
 <template>
   <main class="home">
-    <Login msg="Sign in" />
-    <!-- <Search msg="Search" /> -->
+    <Search v-if="userId" msg="Search" />
+    <Login v-else msg="Sign in" @login="onLogin" />
   </main>
 </template>
 
 <script>
+import authService from '@/service/auth_service'
 
 export default {
   name: 'Home',
   components: {
-    Login: () => import('@/components/Login.vue')
-    // Search: () => import('@/components/Search.vue')
+    Login: () => import('@/components/Login.vue'),
+    Search: () => import('@/components/Search.vue')
+  },
+  props: {
+    userId: {
+      type: String,
+      default: ''
+    }
+  },
+  methods: {
+    goSearch(userId) {
+      console.log(`${userId} before`)
+      this.userId = userId
+      console.log(`${userId} after`)
+    },
+    onLogin(title) {
+      authService
+        .login(title)
+        .then((data) => this.goSearch(data.user.uid))
+    }
   }
 }
 </script>
