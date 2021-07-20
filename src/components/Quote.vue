@@ -9,13 +9,6 @@ export default {
       type: Boolean,
       default: false
     }
-    // text: String
-  },
-  watch: {
-    quoteInSearch(newValue, oldValue) {
-      // befroe css 를 quoteInSearch로 바꾸는 로직이 들어가면 됩니다.
-      // this.quoteInSearch = newValue.
-    }
   }
 }
 </script>
@@ -23,26 +16,26 @@ export default {
 <style lang="scss" scoped>
 @import "@/scss/mixins";
 
-  .quote {
-    &::before {
-      content: 'One martini is alright, two is too many, three is not enough';
-      display: none;
-      position: fixed;
-      top: 50%;
-      transform: translateY(-52%);
-      max-width: 50%;
-      font-family: 'Heebo', sans-serif;
-      text-align: left;
-      font-weight: 700;
-      z-index: 30;
-    }
-
-    &.quoteInSearch::before {
-      content: 'One tequila, two tequila, three tequila, floor';
-    }
+.quote {
+  &::before {
+    content: 'One martini is alright, two is too many, three is not enough';
+    display: none;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-52%);
+    max-width: 50%;
+    font-family: 'Heebo', sans-serif;
+    text-align: left;
+    font-weight: 700;
+    z-index: 30;
   }
 
-  @include tablet {
+  &.quoteInSearch::before {
+    content: 'One tequila, two tequila, three tequila, floor';
+  }
+}
+
+@include tablet {
   .quote {
     &::before {
       display: block;
@@ -55,13 +48,11 @@ export default {
 
 @include desktop {
   .quote {
-        &::before {
-
-      left: 4rem;
-      font-size: 10rem;
-      line-height: 8rem;
+      &::before {
+        left: 4rem;
+        font-size: 10rem;
+       line-height: 8rem;
+     }
   }
-      }
-
 }
 </style>
