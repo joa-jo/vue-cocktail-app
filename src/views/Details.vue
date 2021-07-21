@@ -1,15 +1,19 @@
 <template>
   <main class="details">
-    <h1 class="name">{{ name }}</h1>
-    <p class="taste">{{ taste }}</p>
-    <img :src="`${image}`" :alt="`Image of ${name}`" class="image">
-    <div class="ingres">
-      <h2>Ingredients</h2>
-      <ul class="ingredients">
-        <li v-for="(ingr, index) in ingredients" :key="index">
-          {{ ingr }}
-        </li>
-      </ul>
+    <div class="title">
+      <h1 class="name">{{ name }}</h1>
+      <p class="taste">{{ taste }}</p>
+    </div>
+    <div class="desc">
+      <img :src="`${image}`" :alt="`Image of ${name}`" class="image">
+      <div class="ingres">
+        <h2>Ingredients</h2>
+        <ul>
+          <li v-for="(ingr, index) in ingredients" :key="index" ingr>
+            {{ ingr }}
+          </li>
+        </ul>
+      </div>
     </div>
   </main>
 </template>
@@ -39,5 +43,109 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/scss/variables";
+@import "@/scss/mixins";
+
+    .details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: calc(100vh - 120px);
+        padding: 0 1.8rem;
+    }
+
+    .title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 2rem 0;
+        .name {
+            display: block;
+            margin-bottom: 1rem;
+            font-size: 3rem;
+            &::after {
+                content: '';
+                display: block;
+                width: 120%;
+                height: 2px;
+                background-color: $cocktailDark;
+                transform: translateX(-8%);
+            }
+        }
+        .taste {
+            font-size: 1.2rem;
+        }
+    }
+
+    .desc {
+        .image {
+            width: 100%;
+            margin-bottom: 4rem;
+        }
+    }
+
+    .ingres {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 3rem;
+        h2 {
+            margin-bottom: 2rem;
+        }
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            font-size: 1rem;
+            li {
+                width: 50%;
+                margin-bottom: 1rem;
+                &::before {
+                    content: '·';
+                    margin-right: 0.2rem;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    @include tablet {
+        .details{
+            padding: 0 2.7rem;
+            .name {
+                font-size: 5rem;
+            }
+        }
+        .ingres {
+            h2 {
+                font-size: 2rem;
+            }
+            ul {
+                font-size: 1.2rem;
+            }
+        }
+
+    }
+
+    @include desktop {
+        .title {
+            margin: 4rem 0;
+        }
+
+        .desc {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            .image {
+                width: 50%;
+                margin-right: 4rem;
+                margin-bottom: 0;
+            }
+        }
+        .ingres {
+            margin-bottom: 0;
+        }
+    }
 
 </style>
