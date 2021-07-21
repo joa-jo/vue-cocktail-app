@@ -20,7 +20,7 @@ export default {
   &::before {
     content: 'One martini is alright, two is too many, three is not enough';
     display: none;
-    position: fixed;
+    position: absolute;
     top: 50%;
     transform: translateY(-52%);
     max-width: 50%;

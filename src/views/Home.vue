@@ -61,13 +61,16 @@ main {
 
 .home {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  overflow-y: auto;
 }
 
 @include tablet {
   .home {
     position: relative;
+    display: flex;
     justify-content: flex-end;
     padding: 2rem 0;
   }

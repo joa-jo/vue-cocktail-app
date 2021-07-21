@@ -1,19 +1,21 @@
 <template>
   <section class="search">
-    <!-- Decoration Quote -->
-    <Quote quote-in-search />
-    <!-- Search Part -->
-    <h1>{{ msg }}</h1>
-    <form action="GET" class="searchForm" @submit.prevent="$emit('submit', input)">
-      <input
-        v-model="input"
-        type="text"
-        placeholder="Search"
-      >
-      <button>
-        <img src="@/assets/search.png" alt="Search" class="searchBtnImg">
-      </button>
-    </form>
+    <div class="searchWrapper">
+      <!-- Decoration Quote -->
+      <Quote quote-in-search />
+      <!-- Search Part -->
+      <h1>{{ msg }}</h1>
+      <form action="GET" class="searchForm" @submit.prevent="$emit('submit', input)">
+        <input
+          v-model="input"
+          type="text"
+          placeholder="Search"
+        >
+        <button>
+          <img src="@/assets/search.png" alt="Search" class="searchBtnImg">
+        </button>
+      </form>
+    </div>
   </section>
 </template>
 
@@ -43,7 +45,10 @@ export default {
 
 // Search
 .search {
+  display: flex;
+  align-items: center;
   width: 100%;
+  height: 100%;
   padding: 0 1.8rem;
   text-align: center;
   h1 {
