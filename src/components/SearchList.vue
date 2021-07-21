@@ -10,9 +10,6 @@
 <script>
 export default {
   name: 'SearchList',
-  routes: {
-    path: '@/views/Details'
-  },
   props: {
     cocktailList: {
       type: Array,
@@ -42,7 +39,7 @@ export default {
           cocktailItem.strIngredient9
         ]
       }
-      // details 페이지 이동 + this.cocktailObj 전달
+      this.$router.push({ name: 'Details', params: this.cocktailObj })
     }
   }
 }

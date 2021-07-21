@@ -45,7 +45,6 @@ export default {
         .searchByName(query)
         .then(cocktails => {
           this.cocktailList = cocktails
-          console.log(this.cocktailList)
         })
     }
   }

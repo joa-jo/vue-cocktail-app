@@ -1,6 +1,15 @@
 <template>
   <main>
-    Detail Page Hereeeee
+    <h1>{{ name }}</h1>
+    <p>{{ taste }}</p>
+    <img :src="`${image}`" :alt="`Image of ${name}`">
+    <h2>Ingredients</h2>
+    <!-- ingredients list -->
+    <ul class="ingredients">
+      <li v-for="(ingr, index) in ingredients" :key="index">
+        {{ ingr }}
+      </li>
+    </ul>
   </main>
 </template>
 
@@ -8,7 +17,19 @@
 export default {
   name: 'Details',
   props: {
-    cocktailList: {
+    name: {
+      type: String,
+      default: ''
+    },
+    taste: {
+      type: String,
+      default: ''
+    },
+    image: {
+      type: String,
+      default: ''
+    },
+    ingredients: {
       type: Array,
       default: () => []
     }
