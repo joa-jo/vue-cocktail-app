@@ -26,17 +26,18 @@ export default {
     }
   },
   created() {
-    // TODO localstrage에서 uid SET로직
+    this.userId = localStorage.getItem('userId')
   },
   methods: {
-    goSearch(userId) {
-      this.userId = userId
+    saveUserId(userId) {
+      localStorage.setItem('userId', JSON.stringify(userId))
     },
     onLogin(title) {
       authService
         .login(title)
         .then((data) => {
           this.userId = data.user.uid
+          this.saveUserId(this.userId)
         })
     },
     onSearch(query) {
