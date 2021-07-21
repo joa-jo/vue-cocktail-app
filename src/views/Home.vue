@@ -2,8 +2,8 @@
   <main class="home">
     <Search v-if="userId" msg="Search" @submit="onSearch" />
     <Login v-else msg="Sign in" @login="onLogin" />
-    <section v-if="cocktail">
-      <SearchList :cocktail="cocktail" />
+    <section v-if="cocktailList">
+      <SearchList :cocktail-list="cocktailList" />
     </section>
   </main>
 </template>
@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       userId: null,
-      cocktail: false
+      cocktailList: false
     }
   },
   created() {
@@ -44,8 +44,8 @@ export default {
       cocktail
         .searchByName(query)
         .then(cocktails => {
-          console.log(cocktails)
-          this.cocktail = cocktails
+          this.cocktailList = cocktails
+          console.log(this.cocktailList)
         })
     }
   }
