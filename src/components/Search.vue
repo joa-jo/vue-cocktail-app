@@ -51,6 +51,9 @@ export default {
   height: 100%;
   padding: 0 1.8rem;
   text-align: center;
+  .searchWrapper {
+    width: 100%;
+  }
   h1 {
     display: block;
     margin-bottom: 4rem;
