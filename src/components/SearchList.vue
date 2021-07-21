@@ -1,6 +1,6 @@
 <template>
   <ul class="cocktailList">
-    <li v-for="cocktailItem in cocktailList" :key="cocktailItem.idDrink" class="cocktailItem">
+    <li v-for="cocktailItem in cocktailList" :key="cocktailItem.idDrink" class="cocktailItem" @click.prevent="goDetailsPage(cocktailItem)">
       <img :src="`${cocktailItem.strDrinkThumb}`" :alt="`Image of ${cocktailItem.strDrink}`">
       <h5>{{ cocktailItem.strDrink }}</h5>
     </li>
@@ -10,10 +10,39 @@
 <script>
 export default {
   name: 'SearchList',
+  routes: {
+    path: '@/views/Details'
+  },
   props: {
     cocktailList: {
       type: Array,
       default: () => []
+    }
+  },
+  data() {
+    return {
+      cocktailObj: {}
+    }
+  },
+  methods: {
+    goDetailsPage(cocktailItem) {
+      this.cocktailObj = {
+        name: cocktailItem.strDrink,
+        taste: cocktailItem.strTags,
+        image: cocktailItem.strDrinkThumb,
+        ingredients: [
+          cocktailItem.strIngredient1,
+          cocktailItem.strIngredient2,
+          cocktailItem.strIngredient3,
+          cocktailItem.strIngredient4,
+          cocktailItem.strIngredient5,
+          cocktailItem.strIngredient6,
+          cocktailItem.strIngredient7,
+          cocktailItem.strIngredient8,
+          cocktailItem.strIngredient9
+        ]
+      }
+      // details 페이지 이동 + this.cocktailObj 전달
     }
   }
 }
