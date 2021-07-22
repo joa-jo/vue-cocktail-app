@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       userId: null,
-      cocktailList: false
+      cocktailList: JSON.parse(localStorage.getItem('cocktailList'))
     }
   },
   created() {

@@ -13,7 +13,7 @@ export default {
   props: {
     cocktailList: {
       type: Array,
-      default: () => []
+      default: () => JSON.parse(localStorage.getItem('cocktailList'))
     }
   },
   data() {
