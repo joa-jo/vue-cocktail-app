@@ -50,7 +50,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: calc(100vh - 120px);
+        height: fit-content;
         padding: 0 1.8rem;
     }
 
