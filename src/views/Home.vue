@@ -32,6 +32,9 @@ export default {
     saveUserId(userId) {
       localStorage.setItem('userId', JSON.stringify(userId))
     },
+    saveCocktailList(cocktailList) {
+      localStorage.setItem('cocktailList', JSON.stringify(cocktailList))
+    },
     onLogin(title) {
       authService
         .login(title)
@@ -45,6 +48,7 @@ export default {
         .searchByName(query)
         .then(cocktails => {
           this.cocktailList = cocktails
+          this.saveCocktailList(this.cocktailList)
         })
     }
   }
