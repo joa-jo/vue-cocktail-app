@@ -1,11 +1,11 @@
 <template>
   <main class="details">
     <div class="title">
-      <h1 class="name">{{ name }}</h1>
-      <p class="taste">{{ taste }}</p>
+      <h1 class="name">{{ cocktailObj.name }}</h1>
+      <p class="taste">{{ cocktailObj.taste }}</p>
     </div>
     <div class="desc">
-      <img :src="`${image}`" :alt="`Image of ${name}`" class="image">
+      <img :src="`${cocktailObj.image}`" :alt="`Image of ${cocktailObj.name}`" class="image">
       <div class="ingres">
         <h2>Ingredients</h2>
         <ul>
@@ -16,7 +16,7 @@
         </ul>
       </div>
     </div>
-    <button class="pickBtn" :aria-label="`Pick ${name}`" @click="onPick">
+    <button class="pickBtn" :aria-label="`Pick ${cocktailObj.name}`" @click="onPick">
       {{ btnMsg }}
     </button>
   </main>
@@ -24,6 +24,7 @@
 
 <script>
 import cocktail from '@/service/cocktail_server'
+import cocktailRepo from '@/service/cocktail_repo'
 
 export default {
   name: 'Cocktails',
@@ -32,21 +33,9 @@ export default {
       type: String,
       default: ''
     },
-    name: {
-      type: String,
-      default: JSON.parse(localStorage.getItem('cocktailObj')).name
-    },
-    taste: {
-      type: String,
-      default: JSON.parse(localStorage.getItem('cocktailObj')).taste
-    },
-    image: {
-      type: String,
-      default: JSON.parse(localStorage.getItem('cocktailObj')).image
-    },
-    ingredients: {
-      type: Array,
-      default: () => JSON.parse(localStorage.getItem('cocktailObj')).ingredients
+    cocktailObj: {
+      type: Object,
+      default: () => JSON.parse(localStorage.getItem('cocktailObj'))
     }
   },
   data() {
@@ -61,15 +50,17 @@ export default {
   },
   computed: {
     cleanIngreList() {
-      return this.ingredients.filter(item => item != null)
+      return this.cocktailObj.ingredients.filter(item => item != null && item !== '')
     }
-
   },
   created() {
+    // userId 받아와서 data()에 세팅
     this.userId = localStorage.getItem('userId')
+    // userId 없으면 로그인 페이지로 이동
     if (!this.userId) {
       this.$router.push({ name: 'Home' })
     }
+    // details api 부르기
     this.onShowDetails(this.id)
   },
   methods: {
@@ -82,6 +73,7 @@ export default {
     },
     onPick() {
       this.btnMsg = 'Picked!'
+      cocktailRepo.saveCocktail(this.userId, this.cocktailObj)
     }
   }
 }
@@ -167,6 +159,10 @@ export default {
   background-color: $cocktailDark;
   color: #fff;
   border-radius: 50%;
+  transition: all 250ms;
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 @include tablet {
