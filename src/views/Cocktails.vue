@@ -16,6 +16,9 @@
         </ul>
       </div>
     </div>
+    <button class="pickBtn" :aria-label="`Pick ${name}`" @click="onPick">
+      {{ btnMsg }}
+    </button>
   </main>
 </template>
 
@@ -52,13 +55,15 @@ export default {
       //   type: String,
       //   default: localStorage.getItem('userId')
       // },
-      details: {}
+      details: {},
+      btnMsg: 'Pick'
     }
   },
   computed: {
     cleanIngreList() {
       return this.ingredients.filter(item => item != null)
     }
+
   },
   created() {
     this.userId = localStorage.getItem('userId')
@@ -74,6 +79,9 @@ export default {
         .then(details => {
           this.details = details
         })
+    },
+    onPick() {
+      this.btnMsg = 'Picked!'
     }
   }
 }
@@ -150,6 +158,17 @@ export default {
   }
 }
 
+.pickBtn{
+  position: fixed;
+  bottom: 1.2rem;
+  right: 1.2rem;
+  width: 5rem;
+  height: 5rem;
+  background-color: $cocktailDark;
+  color: #fff;
+  border-radius: 50%;
+}
+
 @include tablet {
   .details{
     padding: 0 2.7rem;
@@ -165,6 +184,13 @@ export default {
     ul {
       font-size: 1.2rem;
     }
+  }
+
+  .pickBtn{
+    bottom: 2rem;
+    right: 2rem;
+    width: 6rem;
+    height: 6rem;
   }
 }
 
