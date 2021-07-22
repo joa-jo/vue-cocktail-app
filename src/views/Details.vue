@@ -9,7 +9,8 @@
       <div class="ingres">
         <h2>Ingredients</h2>
         <ul>
-          <li v-for="(ingr, index) in ingredients" :key="index" ingr>
+          <li v-for="(ingr, index) in cleanIngreList" :key="index">
+            <!-- <img :src="`https://www.thecocktaildb.com/images/ingredients/${ingr}.png`" :alt="`Image of ${ingr}`"> -->
             {{ ingr }}
           </li>
         </ul>
@@ -38,6 +39,11 @@ export default {
       type: Array,
       default: () => JSON.parse(localStorage.getItem('cocktailObj')).ingredients
     }
+  },
+  computed: {
+    cleanIngreList() {
+      return this.ingredients.filter(item => item != null)
+    }
   }
 }
 </script>
@@ -46,108 +52,107 @@ export default {
 @import "@/scss/variables";
 @import "@/scss/mixins";
 
-    .details {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: fit-content;
-        padding: 0 1.8rem;
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+  padding: 0 1.8rem;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+  text-align: center;
+  .name {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    &::after {
+      content: '';
+      display: block;
+      width: 120%;
+      // max-width: calc(100vw - 3.6rem);
+      height: 2px;
+      margin-top: 1rem;
+      background-color: $cocktailDark;
+      transform: translateX(-8%);
     }
+  }
+  .taste {
+    font-size: 1.2rem;
+  }
+}
 
-    .title {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 2rem 0;
-        .name {
-            display: block;
-            margin-bottom: 1rem;
-            font-size: 3rem;
-            &::after {
-                content: '';
-                display: block;
-                width: 120%;
-                // max-width: calc(100vw - 3.6rem);
-                height: 2px;
-                margin-top: 1rem;
-                background-color: $cocktailDark;
-                transform: translateX(-8%);
-            }
-        }
-        .taste {
-            font-size: 1.2rem;
-        }
+.desc {
+  .image {
+    width: 100%;
+    margin-bottom: 4rem;
+  }
+}
+
+.ingres {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 3rem;
+  h2 {
+    margin-bottom: 2rem;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    font-size: 1rem;
+    li {
+      width: 50%;
+      margin-bottom: 1rem;
+      &::before {
+          content: '·';
+          margin-right: 0.2rem;
+          font-weight: 600;
+      }
     }
+  }
+}
 
-    .desc {
-        .image {
-            width: 100%;
-            margin-bottom: 4rem;
-        }
+@include tablet {
+  .details{
+    padding: 0 2.7rem;
+    .name {
+      font-size: 5rem;
     }
-
-    .ingres {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        margin-bottom: 3rem;
-        h2 {
-            margin-bottom: 2rem;
-        }
-        ul {
-            display: flex;
-            flex-wrap: wrap;
-            width: 100%;
-            font-size: 1rem;
-            li {
-                width: 50%;
-                margin-bottom: 1rem;
-                &::before {
-                    content: '·';
-                    margin-right: 0.2rem;
-                    font-weight: 600;
-                }
-            }
-        }
+  }
+  .ingres {
+    h2 {
+      font-size: 2rem;
     }
-
-    @include tablet {
-        .details{
-            padding: 0 2.7rem;
-            .name {
-                font-size: 5rem;
-            }
-        }
-        .ingres {
-            h2 {
-                font-size: 2rem;
-            }
-            ul {
-                font-size: 1.2rem;
-            }
-        }
-
+    ul {
+      font-size: 1.2rem;
     }
+  }
+}
 
-    @include desktop {
-        .title {
-            margin: 4rem 0;
-        }
+@include desktop {
+  .title {
+    margin: 4rem 0;
+  }
 
-        .desc {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            .image {
-                width: 50%;
-                margin-right: 4rem;
-                margin-bottom: 0;
-            }
-        }
-        .ingres {
-            margin-bottom: 0;
-        }
+  .desc {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    .image {
+      width: 50%;
+      margin-right: 4rem;
+      margin-bottom: 0;
     }
-
+  }
+  .ingres {
+    margin-bottom: 0;
+  }
+}
 </style>

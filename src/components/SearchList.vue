@@ -26,7 +26,9 @@ export default {
       localStorage.setItem('cocktailObj', JSON.stringify(cocktailObj))
     },
     goDetailsPage(cocktailItem) {
+      console.log(cocktailItem)
       this.cocktailObj = {
+        id: cocktailItem.idDrink,
         name: cocktailItem.strDrink,
         taste: cocktailItem.strTags,
         image: cocktailItem.strDrinkThumb,
