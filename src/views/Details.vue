@@ -10,8 +10,8 @@
         <h2>Ingredients</h2>
         <ul>
           <li v-for="(ingr, index) in cleanIngreList" :key="index">
-            <!-- <img :src="`https://www.thecocktaildb.com/images/ingredients/${ingr}.png`" :alt="`Image of ${ingr}`"> -->
-            {{ ingr }}
+            <img :src="`https://www.thecocktaildb.com/images/ingredients/${ingr}.png`" :alt="`Image of ${ingr}`" class="ingrImg">
+            <p>{{ ingr }}</p>
           </li>
         </ul>
       </div>
@@ -74,7 +74,6 @@ export default {
       content: '';
       display: block;
       width: 120%;
-      // max-width: calc(100vw - 3.6rem);
       height: 2px;
       margin-top: 1rem;
       background-color: $cocktailDark;
@@ -109,11 +108,12 @@ export default {
     font-size: 1rem;
     li {
       width: 50%;
+      padding: 0 0.8rem;
       margin-bottom: 1rem;
-      &::before {
-          content: '·';
-          margin-right: 0.2rem;
-          font-weight: 600;
+      text-align: center;
+      .ingrImg {
+        width: 100%;
+        margin-bottom: 0.4rem;
       }
     }
   }
@@ -126,6 +126,7 @@ export default {
       font-size: 5rem;
     }
   }
+
   .ingres {
     h2 {
       font-size: 2rem;
@@ -151,8 +152,14 @@ export default {
       margin-bottom: 0;
     }
   }
+
   .ingres {
     margin-bottom: 0;
+    ul {
+      li {
+        width: 25%;
+      }
+    }
   }
 }
 </style>
