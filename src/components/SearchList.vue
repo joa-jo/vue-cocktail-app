@@ -26,7 +26,6 @@ export default {
       localStorage.setItem('cocktailObj', JSON.stringify(cocktailObj))
     },
     goDetailsPage(cocktailItem) {
-      console.log(cocktailItem)
       this.cocktailObj = {
         id: cocktailItem.idDrink,
         name: cocktailItem.strDrink,
@@ -45,7 +44,7 @@ export default {
         ]
       }
       this.saveCocktail(this.cocktailObj)
-      this.$router.push({ name: 'Details', params: this.cocktailObj })
+      this.$router.push({ name: 'Cocktails', params: this.cocktailObj })
     }
   }
 }

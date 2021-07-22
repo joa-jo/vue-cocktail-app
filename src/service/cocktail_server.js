@@ -15,6 +15,15 @@ class Cocktail {
     })
     return response.data.drinks
   }
+
+  async lookUpDetails(query) {
+    const response = await this.client.get('lookup.php', {
+      params: {
+        i: query
+      }
+    })
+    return response.data.drinks
+  }
 }
 
 export default new Cocktail()

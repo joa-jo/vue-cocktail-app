@@ -20,9 +20,19 @@
 </template>
 
 <script>
+import cocktail from '@/service/cocktail_server'
+
 export default {
-  name: 'Details',
+  name: 'Cocktails',
   props: {
+    userId: {
+      type: String,
+      default: localStorage.getItem('userId')
+    },
+    id: {
+      type: String,
+      default: ''
+    },
     name: {
       type: String,
       default: JSON.parse(localStorage.getItem('cocktailObj')).name
@@ -40,9 +50,29 @@ export default {
       default: () => JSON.parse(localStorage.getItem('cocktailObj')).ingredients
     }
   },
+  data() {
+    return {
+      details: {}
+    }
+  },
   computed: {
     cleanIngreList() {
       return this.ingredients.filter(item => item != null)
+    }
+  },
+  created() {
+    this.onShowDetails(this.id)
+    console.log(this.details)
+  },
+  mounted() {
+  },
+  methods: {
+    onShowDetails(id) {
+      cocktail
+        .lookUpDetails(id)
+        .then(details => {
+          this.details = details
+        })
     }
   }
 }
