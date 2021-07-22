@@ -25,10 +25,6 @@ import cocktail from '@/service/cocktail_server'
 export default {
   name: 'Cocktails',
   props: {
-    userId: {
-      type: String,
-      default: localStorage.getItem('userId')
-    },
     id: {
       type: String,
       default: ''
@@ -52,6 +48,10 @@ export default {
   },
   data() {
     return {
+      // userId: {
+      //   type: String,
+      //   default: localStorage.getItem('userId')
+      // },
       details: {}
     }
   },
@@ -61,10 +61,11 @@ export default {
     }
   },
   created() {
+    this.userId = localStorage.getItem('userId')
+    if (!this.userId) {
+      this.$router.push({ name: 'Home' })
+    }
     this.onShowDetails(this.id)
-    console.log(this.details)
-  },
-  mounted() {
   },
   methods: {
     onShowDetails(id) {

@@ -2,7 +2,7 @@
   <main class="home">
     <Search v-if="userId" msg="Search" @submit="onSearch" />
     <Login v-else msg="Sign in" @login="onLogin" />
-    <section v-if="cocktailList">
+    <section v-if="userId && cocktailList">
       <SearchList :cocktail-list="cocktailList" />
     </section>
   </main>
