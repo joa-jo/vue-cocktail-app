@@ -51,10 +51,10 @@ export default {
   },
   data() {
     return {
-      // userId: {
-      //   type: String,
-      //   default: localStorage.getItem('userId')
-      // },
+      userId: {
+        type: String,
+        default: ''
+      },
       details: {},
       btnMsg: 'Pick'
     }
