@@ -67,7 +67,9 @@ export default {
                 content: '';
                 display: block;
                 width: 120%;
+                // max-width: calc(100vw - 3.6rem);
                 height: 2px;
+                margin-top: 1rem;
                 background-color: $cocktailDark;
                 transform: translateX(-8%);
             }
