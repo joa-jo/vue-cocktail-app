@@ -1,11 +1,11 @@
 <template>
   <main class="details">
     <div class="title">
-      <h1 class="name">{{ cocktailObj.name }}</h1>
-      <p class="taste">{{ cocktailObj.taste }}</p>
+      <h1 class="name">{{ details.strDrink }}</h1>
+      <p class="taste">{{ details.strTags }}</p>
     </div>
     <div class="desc">
-      <img :src="`${cocktailObj.image}`" :alt="`Image of ${cocktailObj.name}`" class="image">
+      <img :src="`${details.strDrinkThumb}`" :alt="`Image of ${details.strDrink}`" class="image">
       <div class="ingres">
         <h2>Ingredients</h2>
         <ul>
@@ -16,7 +16,7 @@
         </ul>
       </div>
     </div>
-    <button class="pickBtn" :aria-label="`Pick ${cocktailObj.name}`" @click="onPick">
+    <button class="pickBtn" :aria-label="`Pick ${details.strDrink}`" @click="onPick">
       {{ btnMsg }}
     </button>
   </main>
@@ -50,7 +50,18 @@ export default {
   },
   computed: {
     cleanIngreList() {
-      return this.cocktailObj.ingredients.filter(item => item != null && item !== '')
+      const ingredients = [
+        this.details.strIngredient1,
+        this.details.strIngredient2,
+        this.details.strIngredient3,
+        this.details.strIngredient4,
+        this.details.strIngredient5,
+        this.details.strIngredient6,
+        this.details.strIngredient7,
+        this.details.strIngredient8,
+        this.details.strIngredient9
+      ]
+      return ingredients.filter(item => item != null && item !== '')
     }
   },
   created() {
@@ -61,19 +72,19 @@ export default {
       this.$router.push({ name: 'Home' })
     }
     // details api 부르기
-    this.onShowDetails(this.id)
+    this.onShowDetails(this.cocktailObj.id)
   },
   methods: {
     onShowDetails(id) {
       cocktail
         .lookUpDetails(id)
         .then(details => {
-          this.details = details
+          this.details = details[0]
         })
     },
     onPick() {
       this.btnMsg = 'Picked!'
-      cocktailRepo.saveCocktail(this.userId, this.cocktailObj)
+      cocktailRepo.saveCocktail(this.userId, this.details)
     }
   }
 }

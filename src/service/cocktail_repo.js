@@ -13,11 +13,11 @@ class CocktailRepo {
   }
 
   saveCocktail(userId, cocktail) {
-    firebaseDatabase.ref(`${userId}/cocktails/${cocktail.id}`).set(cocktail)
+    firebaseDatabase.ref(`${userId}/cocktails/${cocktail.idDrink}`).set(cocktail)
   }
 
   removeCocktail(userId, cocktail) {
-    firebaseDatabase.ref(`${userId}/cocktails/${cocktail.id}`).remove()
+    firebaseDatabase.ref(`${userId}/cocktails/${cocktail.idDrink}`).remove()
   }
 }
 

@@ -1,10 +1,10 @@
 <template>
   <main class="your-picks">
     <h1>Your Picks</h1>
-    <ul class="cocktailList">
-      <li v-for="cocktail in cocktails" :key="cocktail.id" class="cocktailItem" @click.prevent="goDetailsPage(cocktail)">
-        <img :src="`${cocktail.image}`" :alt="`${cocktail.name}`">
-        <h5>{{ cocktail.name }}</h5>
+    <ul v-if="userId && cocktailList" class="cocktailList">
+      <li v-for="cocktail in cocktails" :key="cocktail.idDrink" class="cocktailItem" @click.prevent="goDetailsPage(cocktail)">
+        <img :src="`${cocktail.strDrinkThumb}`" :alt="`${cocktail.strDrink}`">
+        <h5>{{ cocktail.strDrink }}</h5>
       </li>
     </ul>
   </main>
@@ -46,24 +46,6 @@ export default {
     },
     goDetailsPage(cocktailItem) {
       this.cocktailObj = cocktailItem
-      // console.log(cocktailItem)
-      // this.cocktailObj = {
-      //   id: cocktailItem.id,
-      //   name: cocktailItem.strDrink,
-      //   taste: cocktailItem.strTags,
-      //   image: cocktailItem.strDrinkThumb,
-      //   ingredients: [
-      //     cocktailItem.strIngredient1,
-      //     cocktailItem.strIngredient2,
-      //     cocktailItem.strIngredient3,
-      //     cocktailItem.strIngredient4,
-      //     cocktailItem.strIngredient5,
-      //     cocktailItem.strIngredient6,
-      //     cocktailItem.strIngredient7,
-      //     cocktailItem.strIngredient8,
-      //     cocktailItem.strIngredient9
-      //   ]
-      // }
       this.$router.push({ name: 'Cocktails', params: this.cocktailObj })
     }
   }

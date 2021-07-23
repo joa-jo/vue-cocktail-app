@@ -27,21 +27,7 @@ export default {
     },
     goDetailsPage(cocktailItem) {
       this.cocktailObj = {
-        id: cocktailItem.idDrink,
-        name: cocktailItem.strDrink,
-        taste: cocktailItem.strTags,
-        image: cocktailItem.strDrinkThumb,
-        ingredients: [
-          cocktailItem.strIngredient1,
-          cocktailItem.strIngredient2,
-          cocktailItem.strIngredient3,
-          cocktailItem.strIngredient4,
-          cocktailItem.strIngredient5,
-          cocktailItem.strIngredient6,
-          cocktailItem.strIngredient7,
-          cocktailItem.strIngredient8,
-          cocktailItem.strIngredient9
-        ]
+        id: cocktailItem.idDrink
       }
       this.saveCocktail(this.cocktailObj)
       this.$router.push({ name: 'Cocktails', params: this.cocktailObj })
