@@ -1,10 +1,10 @@
 <template>
   <main class="your-picks">
     <h1>Your Picks</h1>
-    <ul class="">
-      <li>
-        <img src="" alt="">
-        <h5>cocktail name</h5>
+    <ul class="cocktailList">
+      <li v-for="cocktail in cocktails" :key="cocktail.id" class="cocktailItem">
+        <img :src="`${cocktail.image}`" :alt="`${cocktail.name}`">
+        <h5>{{ cocktail.name }}</h5>
       </li>
     </ul>
   </main>
@@ -50,5 +50,55 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/scss/mixins";
 
+.your-picks {
+  height: fit-content;
+  text-align: center;
+  h1 {
+    margin-bottom: 4rem;
+    font-size: 3rem;
+  }
+}
+
+.cocktailList {
+  width: 100%;
+  padding: 0 1.8rem;
+}
+
+.cocktailItem{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+  cursor: pointer;
+    img {
+      width: 100%;
+    }
+    h5 {
+      text-align: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+}
+
+@include tablet {
+  .cocktailList {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .cocktailItem {
+    width: 50%;
+    padding: 0 0.9rem;
+  }
+}
+
+@include desktop {
+  .cocktailList {
+    margin-top: 30px;
+  }
+  .cocktailItem {
+    width: 25%;
+  }
+}
 </style>
