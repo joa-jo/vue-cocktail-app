@@ -1,13 +1,12 @@
 import { firebaseDatabase } from './firebase.js'
 
 class CocktailRepo {
-  readCocktails(userId, updateCocktailList) {
+  readCocktails(userId, onUpdate) {
     const ref = firebaseDatabase.ref(`${userId}/cocktails`)
     ref.on('value', snapshot => {
       const data = snapshot.val()
-      data && updateCocktailList(data)
+      data && onUpdate(data)
     })
-
     return () => {
       ref.off()
     }
