@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: '/your-picks',
-    name: 'Your Picks',
+    name: 'YourPicks',
     component: () => import('@/views/YourPicks.vue')
   }
 ]

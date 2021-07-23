@@ -2,7 +2,7 @@
   <main class="your-picks">
     <h1>Your Picks</h1>
     <ul class="cocktailList">
-      <li v-for="cocktail in cocktails" :key="cocktail.id" class="cocktailItem">
+      <li v-for="cocktail in cocktails" :key="cocktail.id" class="cocktailItem" @click.prevent="goDetailsPage(cocktail)">
         <img :src="`${cocktail.image}`" :alt="`${cocktail.name}`">
         <h5>{{ cocktail.name }}</h5>
       </li>
@@ -40,10 +40,31 @@ export default {
   methods: {
     onUpdate(cocktails) {
       this.cocktails = cocktails
-      console.log(this.cocktails)
     },
     getPickedList(uid, onUpdate) {
       cocktailRepo.readCocktails(uid, onUpdate)
+    },
+    goDetailsPage(cocktailItem) {
+      this.cocktailObj = cocktailItem
+      // console.log(cocktailItem)
+      // this.cocktailObj = {
+      //   id: cocktailItem.id,
+      //   name: cocktailItem.strDrink,
+      //   taste: cocktailItem.strTags,
+      //   image: cocktailItem.strDrinkThumb,
+      //   ingredients: [
+      //     cocktailItem.strIngredient1,
+      //     cocktailItem.strIngredient2,
+      //     cocktailItem.strIngredient3,
+      //     cocktailItem.strIngredient4,
+      //     cocktailItem.strIngredient5,
+      //     cocktailItem.strIngredient6,
+      //     cocktailItem.strIngredient7,
+      //     cocktailItem.strIngredient8,
+      //     cocktailItem.strIngredient9
+      //   ]
+      // }
+      this.$router.push({ name: 'Cocktails', params: this.cocktailObj })
     }
   }
 }
