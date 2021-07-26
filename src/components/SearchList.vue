@@ -1,6 +1,6 @@
 <template>
   <ul class="cocktailList">
-    <li v-for="cocktailItem in cocktailList" :key="cocktailItem.idDrink" class="cocktailItem" @click.prevent="goDetailsPage(cocktailItem)">
+    <li v-for="cocktailItem in filteredList" :key="cocktailItem.idDrink" class="cocktailItem" @click.prevent="goDetailsPage(cocktailItem)">
       <img :src="`${cocktailItem.strDrinkThumb}`" :alt="`Image of ${cocktailItem.strDrink}`">
       <h5>{{ cocktailItem.strDrink }}</h5>
     </li>
@@ -8,7 +8,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent, ref, computed, onMounted } from '@vue/composition-api'
+
+export default defineComponent({
   name: 'SearchList',
   props: {
     cocktailList: {
@@ -16,24 +18,33 @@ export default {
       default: () => JSON.parse(localStorage.getItem('cocktailList'))
     }
   },
-  data() {
-    return {
-      cocktailObj: {}
-    }
-  },
-  methods: {
-    saveCocktail(cocktailObj) {
+  setup(props, { root }) {
+    const cocktailObj = ref({})
+
+    const filteredList = computed(() => props.cocktailList.filter(a => a.strDrink.startsWith('A')))
+
+    const saveCocktail = (cocktailObj) => {
       localStorage.setItem('cocktailObj', JSON.stringify(cocktailObj))
-    },
-    goDetailsPage(cocktailItem) {
-      this.cocktailObj = {
-        id: cocktailItem.idDrink
+    }
+
+    onMounted(() => {
+      console.log('onMounted')
+    })
+
+    console.log('setup')
+
+    return {
+      filteredList,
+      goDetailsPage(cocktailItem) {
+        cocktailObj.value.cocktailObj = {
+          id: cocktailItem.idDrink
+        }
+        saveCocktail(cocktailObj.value)
+        root.$router.push({ name: 'Cocktails', params: cocktailObj.value })
       }
-      this.saveCocktail(this.cocktailObj)
-      this.$router.push({ name: 'Cocktails', params: this.cocktailObj })
     }
   }
-}
+})
 </script>
 
 <style scoped lang="scss">
