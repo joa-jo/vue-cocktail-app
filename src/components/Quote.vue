@@ -3,14 +3,16 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from '@vue/composition-api'
+
+export default defineComponent({
   props: {
     quoteInSearch: {
       type: Boolean,
       default: false
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

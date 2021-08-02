@@ -16,14 +16,15 @@
 </template>
 
 <script>
+import { defineComponent } from '@vue/composition-api'
 import Footer from './components/Footer.vue'
 
-export default {
+export default defineComponent({
   name: 'App',
   components: {
     Footer
   }
-}
+})
 </script>
 
 <style lang="scss">

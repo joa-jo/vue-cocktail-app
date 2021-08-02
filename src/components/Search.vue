@@ -20,7 +20,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent, ref } from '@vue/composition-api'
+
+export default defineComponent({
   name: 'Search',
   components: {
     Quote: () => import('@/components/Quote.vue')
@@ -31,12 +33,13 @@ export default {
       default: ''
     }
   },
-  data() {
+  setup() {
+    const input = ref('')
     return {
-      input: ''
+      input
     }
   }
-}
+})
 </script>
 
 <style scoped lang="scss">

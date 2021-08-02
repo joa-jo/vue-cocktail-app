@@ -15,7 +15,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent, ref } from '@vue/composition-api'
+
+export default defineComponent({
   name: 'Login',
   components: {
     Quote: () => import('@/components/Quote.vue')
@@ -26,13 +28,13 @@ export default {
       default: ''
     }
   },
-  data() {
+  setup() {
+    const btns = ref([{ title: 'Google' }, { title: 'Facebook' }, { title: 'Github' }])
     return {
-      btns: [{ title: 'Google' }, { title: 'Facebook' }, { title: 'Github' }]
+      btns
     }
   }
-
-}
+})
 </script>
 
 <style scoped lang="scss">
