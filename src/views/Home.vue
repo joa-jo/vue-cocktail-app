@@ -22,7 +22,7 @@ export default defineComponent({
     SearchList: () => import('@/components/SearchList.vue')
   },
   setup() {
-    const userId = ref(null && localStorage.getItem('userId'))
+    const userId = ref(localStorage.getItem('userId'))
     const cocktailList = ref(JSON.parse(localStorage.getItem('cocktailList')))
 
     return {
