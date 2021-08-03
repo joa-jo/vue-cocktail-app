@@ -25,29 +25,30 @@ export default defineComponent({
     const userId = ref(localStorage.getItem('userId'))
     const cocktailList = ref(JSON.parse(localStorage.getItem('cocktailList')))
 
+    function saveUserId(userId) {
+      localStorage.setItem('userId', JSON.stringify(userId))
+    }
+
+    function saveCocktailList(cocktailList) {
+      localStorage.setItem('cocktailList', JSON.stringify(cocktailList))
+    }
     return {
       userId,
       cocktailList,
-      saveUserId(userId) {
-        localStorage.setItem('userId', JSON.stringify(userId))
-      },
-      saveCocktailList(cocktailList) {
-        localStorage.setItem('cocktailList', JSON.stringify(cocktailList))
-      },
       onLogin(title) {
         authService
           .login(title)
           .then((data) => {
-            this.userId = data.user.uid
-            this.saveUserId(this.userId)
+            userId.value = data.user.uid
+            saveUserId(userId.value)
           })
       },
       onSearch(query) {
         cocktail
           .searchByName(query)
           .then(cocktails => {
-            this.cocktailList = cocktails
-            this.saveCocktailList(this.cocktailList)
+            cocktailList.value = cocktails
+            saveCocktailList(cocktailList.value)
           })
       }
     }
