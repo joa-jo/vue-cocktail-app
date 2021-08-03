@@ -9,50 +9,50 @@
 </template>
 
 <script>
+import { defineComponent, ref } from '@vue/composition-api'
+
 import authService from '@/service/auth_service'
 import cocktail from '@/service/cocktail_server'
 
-export default {
+export default defineComponent({
   name: 'Home',
   components: {
     Login: () => import('@/components/Login.vue'),
     Search: () => import('@/components/Search.vue'),
     SearchList: () => import('@/components/SearchList.vue')
   },
-  data() {
+  setup() {
+    const userId = ref(null && localStorage.getItem('userId'))
+    const cocktailList = ref(JSON.parse(localStorage.getItem('cocktailList')))
+
     return {
-      userId: null,
-      cocktailList: JSON.parse(localStorage.getItem('cocktailList'))
-    }
-  },
-  created() {
-    this.userId = localStorage.getItem('userId')
-  },
-  methods: {
-    saveUserId(userId) {
-      localStorage.setItem('userId', JSON.stringify(userId))
-    },
-    saveCocktailList(cocktailList) {
-      localStorage.setItem('cocktailList', JSON.stringify(cocktailList))
-    },
-    onLogin(title) {
-      authService
-        .login(title)
-        .then((data) => {
-          this.userId = data.user.uid
-          this.saveUserId(this.userId)
-        })
-    },
-    onSearch(query) {
-      cocktail
-        .searchByName(query)
-        .then(cocktails => {
-          this.cocktailList = cocktails
-          this.saveCocktailList(this.cocktailList)
-        })
+      userId,
+      cocktailList,
+      saveUserId(userId) {
+        localStorage.setItem('userId', JSON.stringify(userId))
+      },
+      saveCocktailList(cocktailList) {
+        localStorage.setItem('cocktailList', JSON.stringify(cocktailList))
+      },
+      onLogin(title) {
+        authService
+          .login(title)
+          .then((data) => {
+            this.userId = data.user.uid
+            this.saveUserId(this.userId)
+          })
+      },
+      onSearch(query) {
+        cocktail
+          .searchByName(query)
+          .then(cocktails => {
+            this.cocktailList = cocktails
+            this.saveCocktailList(this.cocktailList)
+          })
+      }
     }
   }
-}
+})
 </script>
 
 <style lang="scss">
