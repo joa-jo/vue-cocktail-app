@@ -74,7 +74,7 @@ export default defineComponent({
         })
     }
 
-    onShowDetails(props.cocktailObj.id)
+    onShowDetails(props.id)
     checkLogInStatus()
 
     return {
