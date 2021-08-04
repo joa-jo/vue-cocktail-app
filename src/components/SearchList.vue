@@ -27,7 +27,7 @@ export default defineComponent({
 
     return {
       goDetailsPage(cocktailItem) {
-        cocktailObj.value.cocktailObj = {
+        cocktailObj.value = {
           id: cocktailItem.idDrink
         }
         saveCocktail(cocktailObj.value)
