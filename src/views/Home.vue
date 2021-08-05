@@ -9,50 +9,56 @@
 </template>
 
 <script>
+import { defineComponent, ref } from '@vue/composition-api'
+
 import authService from '@/service/auth_service'
 import cocktail from '@/service/cocktail_server'
 
-export default {
+export default defineComponent({
   name: 'Home',
   components: {
     Login: () => import('@/components/Login.vue'),
     Search: () => import('@/components/Search.vue'),
     SearchList: () => import('@/components/SearchList.vue')
   },
-  data() {
-    return {
-      userId: null,
-      cocktailList: JSON.parse(localStorage.getItem('cocktailList'))
-    }
-  },
-  created() {
-    this.userId = localStorage.getItem('userId')
-  },
-  methods: {
-    saveUserId(userId) {
+  setup() {
+    const userId = ref(localStorage.getItem('userId'))
+    const cocktailList = ref(JSON.parse(localStorage.getItem('cocktailList')))
+
+    function saveUserId(userId) {
       localStorage.setItem('userId', JSON.stringify(userId))
-    },
-    saveCocktailList(cocktailList) {
+    }
+
+    function saveCocktailList(cocktailList) {
       localStorage.setItem('cocktailList', JSON.stringify(cocktailList))
-    },
-    onLogin(title) {
+    }
+
+    function onLogin(title) {
       authService
         .login(title)
         .then((data) => {
-          this.userId = data.user.uid
-          this.saveUserId(this.userId)
+          userId.value = data.user.uid
+          saveUserId(userId.value)
         })
-    },
-    onSearch(query) {
+    }
+
+    function onSearch(query) {
       cocktail
         .searchByName(query)
         .then(cocktails => {
-          this.cocktailList = cocktails
-          this.saveCocktailList(this.cocktailList)
+          cocktailList.value = cocktails
+          saveCocktailList(cocktailList.value)
         })
     }
+
+    return {
+      userId,
+      cocktailList,
+      onLogin,
+      onSearch
+    }
   }
-}
+})
 </script>
 
 <style lang="scss">

@@ -1,7 +1,7 @@
 <template>
   <main class="your-picks">
     <h1>Your Picks</h1>
-    <ul v-if="userId && cocktailList" class="cocktailList">
+    <ul class="cocktailList">
       <li v-for="cocktail in cocktails" :key="cocktail.idDrink" class="cocktailItem" @click.prevent="goDetailsPage(cocktail)">
         <img :src="`${cocktail.strDrinkThumb}`" :alt="`${cocktail.strDrink}`">
         <h5>{{ cocktail.strDrink }}</h5>
@@ -11,45 +11,47 @@
 </template>
 
 <script>
+import { defineComponent, ref } from '@vue/composition-api'
+
 import cocktailRepo from '@/service/cocktail_repo'
 
-export default {
+export default defineComponent({
   name: 'YourPicks',
-  data() {
-    return {
-      userId: {
-        type: String,
-        default: ''
-      },
-      cocktails: {
-        type: Array,
-        default: () => []
+  setup(props, { root }) {
+    const userId = localStorage.getItem('userId')
+    const cocktails = ref([])
+    const cocktailObj = ref({})
+
+    function goDetailsPage(cocktailItem) {
+      cocktailObj.value = {
+        id: cocktailItem.idDrink
+      }
+      root.$router.push({ name: 'Cocktails', params: cocktailObj.value })
+    }
+
+    function checkLogInStatus() {
+      if (!userId) {
+        root.$router.push({ name: 'Home' })
       }
     }
-  },
-  created() {
-    // userId 받아와서 data()에 세팅
-    this.userId = localStorage.getItem('userId')
-    // userId 없으면 로그인 페이지로 이동
-    if (!this.userId) {
-      this.$router.push({ name: 'Home' })
-    }
-    // user가 pick한 리스트 불러오기
-    this.getPickedList(this.userId, this.onUpdate)
-  },
-  methods: {
-    onUpdate(cocktails) {
-      this.cocktails = cocktails
-    },
-    getPickedList(uid, onUpdate) {
+
+    function getPickedList(uid, onUpdate) {
       cocktailRepo.readCocktails(uid, onUpdate)
-    },
-    goDetailsPage(cocktailItem) {
-      this.cocktailObj = cocktailItem
-      this.$router.push({ name: 'Cocktails', params: this.cocktailObj })
+    }
+
+    function onUpdate(data) {
+      cocktails.value = data
+    }
+
+    getPickedList(userId, onUpdate)
+    checkLogInStatus()
+
+    return {
+      cocktails,
+      goDetailsPage
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

@@ -9,7 +9,7 @@
       <div class="ingres">
         <h2>Ingredients</h2>
         <ul>
-          <li v-for="(ingr, index) in cleanIngreList" :key="index">
+          <li v-for="(ingr, index) in filteredIngredients" :key="index">
             <img :src="`https://www.thecocktaildb.com/images/ingredients/${ingr}.png`" :alt="`Image of ${ingr}`" class="ingrImg">
             <p>{{ ingr }}</p>
           </li>
@@ -23,10 +23,12 @@
 </template>
 
 <script>
+import { defineComponent, ref, computed } from '@vue/composition-api'
+
 import cocktail from '@/service/cocktail_server'
 import cocktailRepo from '@/service/cocktail_repo'
 
-export default {
+export default defineComponent({
   name: 'Cocktails',
   props: {
     id: {
@@ -38,56 +40,56 @@ export default {
       default: () => JSON.parse(localStorage.getItem('cocktailObj'))
     }
   },
-  data() {
-    return {
-      userId: {
-        type: String,
-        default: ''
-      },
-      details: {},
-      btnMsg: 'Pick'
-    }
-  },
-  computed: {
-    cleanIngreList() {
+  setup(props, { root }) {
+    const userId = localStorage.getItem('userId')
+    const details = ref({})
+    const btnMsg = ref('Pick')
+
+    const filteredIngredients = computed(() => {
       const ingredients = [
-        this.details.strIngredient1,
-        this.details.strIngredient2,
-        this.details.strIngredient3,
-        this.details.strIngredient4,
-        this.details.strIngredient5,
-        this.details.strIngredient6,
-        this.details.strIngredient7,
-        this.details.strIngredient8,
-        this.details.strIngredient9
+        details.value.strIngredient1,
+        details.value.strIngredient2,
+        details.value.strIngredient3,
+        details.value.strIngredient4,
+        details.value.strIngredient5,
+        details.value.strIngredient6,
+        details.value.strIngredient7,
+        details.value.strIngredient8,
+        details.value.strIngredient9
       ]
       return ingredients.filter(item => item != null && item !== '')
+    })
+
+    function onPick() {
+      btnMsg.value = 'Picked!'
+      cocktailRepo.saveCocktail(userId.value, details.value)
     }
-  },
-  created() {
-    // userId 받아와서 data()에 세팅
-    this.userId = localStorage.getItem('userId')
-    // userId 없으면 로그인 페이지로 이동
-    if (!this.userId) {
-      this.$router.push({ name: 'Home' })
+
+    function checkLogInStatus() {
+      if (!userId) {
+        root.$router.push({ name: 'Home' })
+      }
     }
-    // details api 부르기
-    this.onShowDetails(this.cocktailObj.id)
-  },
-  methods: {
-    onShowDetails(id) {
+
+    function onShowDetails(id) {
       cocktail
         .lookUpDetails(id)
-        .then(details => {
-          this.details = details[0]
+        .then(data => {
+          details.value = data[0]
         })
-    },
-    onPick() {
-      this.btnMsg = 'Picked!'
-      cocktailRepo.saveCocktail(this.userId, this.details)
+    }
+
+    onShowDetails(props.id)
+    checkLogInStatus()
+
+    return {
+      details,
+      btnMsg,
+      filteredIngredients,
+      onPick
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>
