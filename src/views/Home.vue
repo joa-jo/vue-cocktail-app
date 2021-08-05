@@ -32,25 +32,30 @@ export default defineComponent({
     function saveCocktailList(cocktailList) {
       localStorage.setItem('cocktailList', JSON.stringify(cocktailList))
     }
+
+    function onLogin(title) {
+      authService
+        .login(title)
+        .then((data) => {
+          userId.value = data.user.uid
+          saveUserId(userId.value)
+        })
+    }
+
+    function onSearch(query) {
+      cocktail
+        .searchByName(query)
+        .then(cocktails => {
+          cocktailList.value = cocktails
+          saveCocktailList(cocktailList.value)
+        })
+    }
+
     return {
       userId,
       cocktailList,
-      onLogin(title) {
-        authService
-          .login(title)
-          .then((data) => {
-            userId.value = data.user.uid
-            saveUserId(userId.value)
-          })
-      },
-      onSearch(query) {
-        cocktail
-          .searchByName(query)
-          .then(cocktails => {
-            cocktailList.value = cocktails
-            saveCocktailList(cocktailList.value)
-          })
-      }
+      onLogin,
+      onSearch
     }
   }
 })

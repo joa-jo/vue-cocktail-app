@@ -22,6 +22,13 @@ export default defineComponent({
     const cocktails = ref([])
     const cocktailObj = ref({})
 
+    function goDetailsPage(cocktailItem) {
+      cocktailObj.value = {
+        id: cocktailItem.idDrink
+      }
+      root.$router.push({ name: 'Cocktails', params: cocktailObj.value })
+    }
+
     function checkLogInStatus() {
       if (!userId.value) {
         root.$router.push({ name: 'Home' })
@@ -41,12 +48,7 @@ export default defineComponent({
 
     return {
       cocktails,
-      goDetailsPage(cocktailItem) {
-        cocktailObj.value = {
-          id: cocktailItem.idDrink
-        }
-        root.$router.push({ name: 'Cocktails', params: cocktailObj.value })
-      }
+      goDetailsPage
     }
   }
 })

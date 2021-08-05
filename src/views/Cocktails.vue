@@ -60,6 +60,11 @@ export default defineComponent({
       return ingredients.filter(item => item != null && item !== '')
     })
 
+    function onPick() {
+      btnMsg.value = 'Picked!'
+      cocktailRepo.saveCocktail(userId.value, details.value)
+    }
+
     function checkLogInStatus() {
       if (!userId.value) {
         root.$router.push({ name: 'Home' })
@@ -81,10 +86,7 @@ export default defineComponent({
       details,
       btnMsg,
       filteredIngredients,
-      onPick() {
-        btnMsg.value = 'Picked!'
-        cocktailRepo.saveCocktail(userId.value, details.value)
-      }
+      onPick
     }
   }
 })

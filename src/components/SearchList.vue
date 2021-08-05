@@ -21,18 +21,20 @@ export default defineComponent({
   setup(props, { root }) {
     const cocktailObj = ref({})
 
-    const saveCocktail = (cocktailObj) => {
+    function saveCocktail(cocktailObj) {
       localStorage.setItem('cocktailObj', JSON.stringify(cocktailObj))
     }
 
-    return {
-      goDetailsPage(cocktailItem) {
-        cocktailObj.value = {
-          id: cocktailItem.idDrink
-        }
-        saveCocktail(cocktailObj.value)
-        root.$router.push({ name: 'Cocktails', params: cocktailObj.value })
+    function goDetailsPage(cocktailItem) {
+      cocktailObj.value = {
+        id: cocktailItem.idDrink
       }
+      saveCocktail(cocktailObj.value)
+      root.$router.push({ name: 'Cocktails', params: cocktailObj.value })
+    }
+
+    return {
+      goDetailsPage
     }
   }
 })
