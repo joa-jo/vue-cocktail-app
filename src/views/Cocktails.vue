@@ -41,7 +41,7 @@ export default defineComponent({
     }
   },
   setup(props, { root }) {
-    const userId = ref(localStorage.getItem('userId'))
+    const userId = localStorage.getItem('userId')
     const details = ref({})
     const btnMsg = ref('Pick')
 
@@ -66,7 +66,7 @@ export default defineComponent({
     }
 
     function checkLogInStatus() {
-      if (!userId.value) {
+      if (!userId) {
         root.$router.push({ name: 'Home' })
       }
     }

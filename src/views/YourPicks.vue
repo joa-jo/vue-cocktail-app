@@ -18,7 +18,7 @@ import cocktailRepo from '@/service/cocktail_repo'
 export default defineComponent({
   name: 'YourPicks',
   setup(props, { root }) {
-    const userId = ref(localStorage.getItem('userId'))
+    const userId = localStorage.getItem('userId')
     const cocktails = ref([])
     const cocktailObj = ref({})
 
@@ -30,7 +30,7 @@ export default defineComponent({
     }
 
     function checkLogInStatus() {
-      if (!userId.value) {
+      if (!userId) {
         root.$router.push({ name: 'Home' })
       }
     }
@@ -43,7 +43,7 @@ export default defineComponent({
       cocktails.value = data
     }
 
-    getPickedList(userId.value, onUpdate)
+    getPickedList(userId, onUpdate)
     checkLogInStatus()
 
     return {
