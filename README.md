@@ -15,8 +15,8 @@
 
 
 ## The App
-**"What was the name of the cocktail that I drank last time?"**<br/>
-The world of cocktails is huge and it's too difficult to remember their name for me.
+**_"What was the name of the cocktail that I drank last time?"_**<br/>
+The world of cocktails is huge and it's too difficult to remember their names for me.
 I am sick of trying to remember their name at a bar, thus I made this app.
 Hopefully this helps you to enjoy your drinking life too. Cheers! :clinking_glasses:
 
