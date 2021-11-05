@@ -10,15 +10,13 @@
 - [Features](#features)
 - [Implementation](#implementation)
 - [Tech Stack](#tech-stack)
-- [Motivation](#motivation)
-- [Team](#team)
 
 
 ## The App
 **_"What was the name of the cocktail that I drank last time?"_**<br/>
-The world of cocktails is huge and it's too difficult to remember their names for me.
-I am sick of trying to remember their name at a bar, thus I made this app.
-Hopefully this helps you to enjoy your drinking life too. Cheers! :clinking_glasses:
+The world of cocktails is huge, and it's too difficult to remember their names for me.<br/>
+I got sick of trying to come up with them at a bar, thus I made this app.<br/>
+Hopefully it enhances the quality of your drinking life as it did for mine. Cheers! :clinking_glasses:
 
 ## Features
 - Login function for customizing cocktail-pick-list for each user.
